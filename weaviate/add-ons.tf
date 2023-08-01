@@ -78,6 +78,19 @@ module "eks_blueprints_addons" {
                 limits:
                   # enable if running with CUDA support
                   nvidia.com/gpu: 1
+            reranker-transformers:
+              enabled: true
+              envconfig:
+                # enable for CUDA support. Your K8s cluster needs to be configured
+                # accordingly and you need to explicitly set GPU requests & limits below
+                enable_cuda: true
+              resources:
+                requests:
+                  # enable if running with CUDA support
+                  nvidia.com/gpu: 1
+                limits:
+                  # enable if running with CUDA support
+                  nvidia.com/gpu: 1
         EOT
       ]
     }

@@ -39,3 +39,4 @@ terraform.rc
 # Artifacts
 *.zip
 *.csv
+.DS_Store

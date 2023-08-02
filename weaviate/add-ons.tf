@@ -67,6 +67,13 @@ module "eks_blueprints_addons" {
           modules:
             text2vec-transformers:
               enabled: true
+              # replace with model of choice, see
+              # https://weaviate.io/developers/weaviate/modules/retriever-vectorizer-modules/text2vec-transformers
+              # for all supported models or build your own container.
+              tag: distilbert-base-uncased
+              repo: semitechnologies/transformers-inference
+              registry: docker.io
+              replicas: 1
               envconfig:
                 # enable for CUDA support. Your K8s cluster needs to be configured
                 # accordingly and you need to explicitly set GPU requests & limits below
@@ -80,15 +87,23 @@ module "eks_blueprints_addons" {
                   nvidia.com/gpu: 1
             reranker-transformers:
               enabled: true
+              tag: cross-encoder-ms-marco-MiniLM-L-6-v2
+              repo: semitechnologies/reranker-transformers
+              registry: docker.io
+              replicas: 1
               envconfig:
                 # enable for CUDA support. Your K8s cluster needs to be configured
                 # accordingly and you need to explicitly set GPU requests & limits below
                 enable_cuda: true
               resources:
                 requests:
+                  cpu: '1000m'
+                  memory: '3000Mi'
                   # enable if running with CUDA support
                   nvidia.com/gpu: 1
                 limits:
+                  cpu: '1000m'
+                  memory: '5000Mi'
                   # enable if running with CUDA support
                   nvidia.com/gpu: 1
         EOT

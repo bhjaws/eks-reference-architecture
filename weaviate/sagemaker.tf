@@ -58,11 +58,11 @@ resource "aws_sagemaker_notebook_instance_lifecycle_configuration" "this" {
   on_start = base64encode(
     <<-EOT
       #!/bin/bash
-
+      cd /home/ec2-user/SageMaker/
       git clone -b bhjaws https://github.com/bhjaws/eks-reference-architecture.git
       cp -R eks-reference-architecture/weaviate/SeedCode/ .
       rm -r -f eks-reference-architecture/
-      
+
       set -e
 
       # Set environment variables for notebooks

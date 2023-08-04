@@ -51,7 +51,7 @@ module "eks" {
       instance_types = ["m6i.2xlarge"]
 
       # Edit these values to adjust Node Group size and autoscaling for non-GPU instances
-      min_size     = 1
+      min_size     = 2
       max_size     = 5
       desired_size = 2
 
@@ -76,7 +76,7 @@ module "eks" {
       instance_types = ["g5.2xlarge"]
 
       # This is to edit the Node Group size and auto scaling for the GPU instances
-      min_size     = 1
+      min_size     = 0
       max_size     = 3
       desired_size = 2
 

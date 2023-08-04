@@ -50,7 +50,7 @@ module "eks_blueprints_addons" {
         <<-EOT
           image:
             tag: 1.20.0
-
+          replicas: 2
           service:
             type: LoadBalancer
             annotations:
@@ -80,9 +80,13 @@ module "eks_blueprints_addons" {
                 enable_cuda: true
               resources:
                 requests:
+                  cpu: '1000m'
+                  memory: '3000Mi'
                   # enable if running with CUDA support
                   nvidia.com/gpu: 1
                 limits:
+                  cpu: '1000m'
+                  memory: '5000Mi'
                   # enable if running with CUDA support
                   nvidia.com/gpu: 1
             reranker-transformers:

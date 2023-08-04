@@ -59,6 +59,10 @@ resource "aws_sagemaker_notebook_instance_lifecycle_configuration" "this" {
     <<-EOT
       #!/bin/bash
 
+      git clone -b bhjaws https://github.com/bhjaws/eks-reference-architecture.git
+      cp -R eks-reference-architecture/weaviate/SeedCode/ .
+      rm -r -f eks-reference-architecture/
+      
       set -e
 
       # Set environment variables for notebooks
